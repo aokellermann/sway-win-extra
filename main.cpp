@@ -54,26 +54,28 @@ void moveContainer(const swe::Client& client, ulong target)
   }
 }
 
-int main(int argc, char** argv) {
-  if (argc != 3) {
+int main(int argc, const char** argv) {
+  if (argc < 3) {
+    std::cout << "Usage: sway_win_extra [command] [number]\n";
+    std::cout << "\tCommands\n:";
+    std::cout << "\t\t- workspaces";
+    std::cout << "\t\t- move container to";
     std::exit(EXIT_FAILURE);
   }
 
   displayConfig = swe::env::GetDisplayConfig();
   if (displayConfig.empty()) {
     std::cerr << "Environment variable $MONS not set\n";
-    std::exit(1);
+    std::exit(EXIT_FAILURE);
   }
 
-  const auto cmd = argv[1];
+  const auto cmd = swe::util::Join(&argv[1], &argv[argc - 1], ' ');
+  const auto target = std::strtoul(argv[argc - 1], nullptr, 10);
 
   swe::Client client;
-
-  if (std::strcmp(cmd, "workspaces") == 0) {
-    const auto target = std::strtoul(argv[2], nullptr, 10);
+  if (std::strcmp(cmd.c_str(), "workspaces") == 0) {
     changeAllWorkspaces(client, target);
-  } else if (std::strcmp(cmd, "move") == 0) {
-    const auto target = std::strtoul(argv[2], nullptr, 10);
+  } else if (std::strcmp(cmd.c_str(), "move container to") == 0) {
     moveContainer(client, target);
   }
 

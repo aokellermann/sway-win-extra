@@ -22,8 +22,8 @@ std::vector<std::string> Split(std::string&& s)
     return results;
 }
 
-template <typename InputIt>
-std::string Join(InputIt first, InputIt last, const std::string& delimiter) {
+template <typename InputIt, typename Delim>
+std::string Join(InputIt first, InputIt last, Delim delimiter) {
   if (first == last) return {};
 
   std::ostringstream ss;

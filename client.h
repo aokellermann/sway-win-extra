@@ -37,6 +37,13 @@ public:
     _client->command(workspaceCommand + target);
   }
 
+  void MoveContainer(ulong target) const { MoveContainer(std::to_string(target)); }
+
+  void MoveContainer(const std::string &target) const {
+    const static std::string workspaceCommand("move container to workspace ");
+    _client->command(workspaceCommand + target);
+  }
+
 private:
   static std::string GetOutputName(const output &output) {
     std::stringstream sstr;

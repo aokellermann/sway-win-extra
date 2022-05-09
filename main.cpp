@@ -1,10 +1,10 @@
 #include <array>
 #include <swayipc-cpp/sway_socket.hpp>
 #include <iostream>
-#include <algorithm>
 
 #include "client.h"
 #include "env.h"
+#include "util.h"
 
 static std::vector<std::string> displayConfig;
 
@@ -65,7 +65,7 @@ int main(int argc, const char** argv) {
 
   displayConfig = swe::env::GetDisplayConfig();
   if (displayConfig.empty()) {
-    std::cerr << "Environment variable $MONS not set\n";
+    std::cerr << "Environment variable $MON0 not set\n";
     std::exit(EXIT_FAILURE);
   }
 

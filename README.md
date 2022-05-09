@@ -22,9 +22,11 @@ sudo make install
 ## Usage
 
 ### Setup
-Define all displays in comma-separated environment variable `$MONS`:
+Define all displays in environment variables `$MON0`-`$MON9`:
 ```shell
-export MONS="Unknown 0x313D 0x00000000,Unknown 2367 AJMG79A000532,Unknown 2367 AJMG79A000521"
+export MON0="Unknown 0x313D 0x00000000"
+export MON1="Unknown 2367 AJMG79A000532"
+export MON2="Unknown 2367 AJMG79A000521"
 ```
 
 Display names can be obtained with `swaymsg -t get_outputs`.

@@ -8,6 +8,16 @@ When not using multihead, the commands default to monohead equivalent commands.
 
 ## Build
 
+### PKGBUILD
+
+```sh
+mkdir build && cd build
+curl -o PKGBUILD https://raw.githubusercontent.com/aokellermann/sway-win-extra/master/PKGBUILD
+yay -Bi .
+```
+
+### Manual
+
 Dependencies:
 - CMake (build only)
 - [swayipc-cpp](https://github.com/aokellermann/swayipc-cpp)

@@ -9,10 +9,11 @@
 namespace swe::client {
 
 class Client {
+public:
   using output = swayipc::data::output_s;
   using outputs = std::vector<std::pair<std::string, output>>;
+  using tree = swayipc::data::container;
 
-public:
   explicit Client() {
     _sock.connect();
     _client = std::make_unique<swayipc::client>(&_sock);
@@ -42,6 +43,16 @@ public:
   void MoveContainer(const std::string &target) const {
     const static std::string workspaceCommand("move container to workspace ");
     _client->command(workspaceCommand + target);
+  }
+
+  [[nodiscard]] tree GetTree() const {
+    return _client->get_tree();
+  }
+
+  void ToggleScratchpad(const std::string& target) const {
+    const static std::string workspaceCommand(" scratchpad show");
+    const auto formattedTarget = "[app_id=" + target + ']';
+    _client->command(formattedTarget + workspaceCommand);
   }
 
 private:

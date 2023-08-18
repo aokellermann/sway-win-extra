@@ -11,7 +11,7 @@
 using namespace swe;
 
 int main(int argc, const char **argv) {
-  if (argc < 3) {
+  if (argc < 2) {
     std::cout << "Usage: sway_win_extra [command]\n";
     std::cout << "\tCommands:\n";
     std::cout << "\t\t- workspaces [number]\n";
@@ -24,14 +24,17 @@ int main(int argc, const char **argv) {
     std::exit(EXIT_FAILURE);
   }
 
-  const auto cmd = swe::util::Join(&argv[1], &argv[argc - 1], ' ');
-  const auto target = std::strtoul(argv[argc - 1], nullptr, 10);
+  const auto cmd = argv[1];
 
   client::Client client;
-  if (std::strcmp(cmd.c_str(), "workspaces") == 0) {
+  if (std::strcmp(cmd, "workspaces") == 0) {
+    const auto target = std::strtoul(argv[argc - 1], nullptr, 10);
     workspace::changeAllWorkspaces(client, target);
-  } else if (std::strcmp(cmd.c_str(), "move container to") == 0) {
+  } else if (std::strcmp(cmd, "move_container_to") == 0) {
+    const auto target = std::strtoul(argv[argc - 1], nullptr, 10);
     container::moveContainer(client, target);
+  } else if (std::strcmp(cmd, "scratchpad_hide") == 0) {
+    container::toggleScratchPadIfShowing(client);
   } else {
     std::cerr << "Unknown command\n";
     std::exit(EXIT_FAILURE);

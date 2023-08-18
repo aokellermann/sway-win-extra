@@ -33,8 +33,9 @@ int main(int argc, const char **argv) {
   } else if (std::strcmp(cmd, "move_container_to") == 0) {
     const auto target = std::strtoul(argv[argc - 1], nullptr, 10);
     container::moveContainer(client, target);
-  } else if (std::strcmp(cmd, "scratchpad_hide") == 0) {
-    container::toggleScratchPadIfShowing(client);
+  } else if (std::strcmp(cmd, "scratchpad_show_except") == 0) {
+    const auto target = argv[2];
+    container::scratchpadShowExcept(client, std::string(target));
   } else {
     std::cerr << "Unknown command\n";
     std::exit(EXIT_FAILURE);

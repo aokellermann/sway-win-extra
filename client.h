@@ -6,7 +6,7 @@
 
 #include "env.h"
 
-namespace swe {
+namespace swe::client {
 
 class Client {
   using output = swayipc::data::output_s;
@@ -54,4 +54,4 @@ private:
   swayipc::sway_socket _sock;
   std::unique_ptr<swayipc::client> _client;
 };
-}
+}// namespace swe::client

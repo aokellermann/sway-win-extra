@@ -7,7 +7,9 @@ include(GNUInstallDirs)
 
 find_package(swayipc_cpp 1.0.0 REQUIRED)
 
-add_executable(${CMAKE_PROJECT_NAME} main.cpp client.h util.h env.h util.h)
+add_executable(${CMAKE_PROJECT_NAME} main.cpp client.h util.h env.h util.h
+        workspace.h
+        container.h)
 
 target_link_libraries(
         ${CMAKE_PROJECT_NAME}

@@ -32,7 +32,10 @@ int main(int argc, const char **argv) {
     workspace::changeAllWorkspaces(client, target);
   } else if (std::strcmp(cmd, "move_container_to") == 0) {
     const auto target = std::strtoul(argv[argc - 1], nullptr, 10);
-    container::moveContainer(client, target);
+    container::moveContainerToWorkspace(client, target);
+  } else if (std::strcmp(cmd, "move_container_to_output") == 0) {
+    const auto target = std::strtoul(argv[argc - 1], nullptr, 10);
+    container::moveContainerToOutput(client, target);
   } else if (std::strcmp(cmd, "scratchpad_show_except") == 0) {
     const auto target = argv[2];
     container::scratchpadShowExcept(client, std::string(target));

@@ -38,11 +38,16 @@ public:
     _client->command(workspaceCommand + target);
   }
 
-  void MoveContainer(ulong target) const { MoveContainer(std::to_string(target)); }
+  void MoveContainerToWorkspace(ulong target) const { MoveContainerToWorkspace(std::to_string(target)); }
 
-  void MoveContainer(const std::string &target) const {
+  void MoveContainerToWorkspace(const std::string &target) const {
     const static std::string workspaceCommand("move container to workspace ");
     _client->command(workspaceCommand + target);
+  }
+
+  void MoveContainerToOutput(const std::string &target) const {
+    const static std::string outputCommand("move container to output ");
+    _client->command(outputCommand + '\'' + target + '\'');
   }
 
   [[nodiscard]] tree GetTree() const {

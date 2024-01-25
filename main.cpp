@@ -15,7 +15,8 @@ int main(int argc, const char **argv) {
     std::cout << "Usage: sway_win_extra [command]\n";
     std::cout << "\tCommands:\n";
     std::cout << "\t\t- workspaces [number]\n";
-    std::cout << "\t\t- move container to [number]";
+    std::cout << "\t\t- move container to [number]\n";
+    std::cout << "\t\t- move container to output [number]\n";
     std::exit(EXIT_FAILURE);
   }
 

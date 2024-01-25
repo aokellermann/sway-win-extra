@@ -54,12 +54,6 @@ public:
     return _client->get_tree();
   }
 
-  void ToggleScratchpad(const std::string& target) const {
-    const static std::string workspaceCommand(" scratchpad show");
-    const auto formattedTarget = "[app_id=" + target + ']';
-    _client->command(formattedTarget + workspaceCommand);
-  }
-
 private:
   static std::string GetOutputName(const output &output) {
     std::stringstream sstr;

@@ -5,6 +5,7 @@
 #include <utility>
 
 #include "env.h"
+#include "log.h"
 
 namespace swe::client {
 
@@ -15,11 +16,13 @@ public:
   using tree = swayipc::data::container;
 
   explicit Client() {
+    LOG_INFO("Client constructor called");
     _sock.connect();
     _client = std::make_unique<swayipc::client>(&_sock);
   }
 
   [[nodiscard]] outputs GetOutputs() const {
+    LOG_INFO("GetOutputs called");
     auto rawOutputs = _client->get_outputs();
 
     outputs outputsByName;
@@ -31,26 +34,30 @@ public:
     return outputsByName;
   }
 
-  void SetWorkspace(ulong target) const { SetWorkspace(std::to_string(target)); }
+  void SetWorkspace(ulong target) const { LOG_INFO("SetWorkspace called with ulong target=" << target); SetWorkspace(std::to_string(target)); }
 
   void SetWorkspace(const std::string &target) const {
+    LOG_INFO("SetWorkspace called with string target=" << target);
     const static std::string workspaceCommand("workspace ");
     _client->command(workspaceCommand + target);
   }
 
-  void MoveContainerToWorkspace(ulong target) const { MoveContainerToWorkspace(std::to_string(target)); }
+  void MoveContainerToWorkspace(ulong target) const { LOG_INFO("MoveContainerToWorkspace called with ulong target=" << target); MoveContainerToWorkspace(std::to_string(target)); }
 
   void MoveContainerToWorkspace(const std::string &target) const {
+    LOG_INFO("MoveContainerToWorkspace called with string target=" << target);
     const static std::string workspaceCommand("move container to workspace ");
     _client->command(workspaceCommand + target);
   }
 
   void MoveContainerToOutput(const std::string &target) const {
+    LOG_INFO("MoveContainerToOutput called with target=" << target);
     const static std::string outputCommand("move container to output ");
     _client->command(outputCommand + '\'' + target + '\'');
   }
 
   [[nodiscard]] tree GetTree() const {
+    LOG_INFO("GetTree called");
     return _client->get_tree();
   }
 

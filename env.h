@@ -3,10 +3,12 @@
 #include <fstream>
 #include <string>
 #include <vector>
+#include "log.h"
 
 namespace swe::env {
 
 std::vector<std::string> GetDisplayConfig() {
+  LOG_INFO("GetDisplayConfig called");
   std::vector<std::string> mons;
   const char *mon;
   char monKey[5] = "MON0";
@@ -19,13 +21,14 @@ std::vector<std::string> GetDisplayConfig() {
 }
 
 std::vector<std::string> GetDisplayConfigFile() {
+  LOG_INFO("GetDisplayConfigFile called");
   std::vector<std::string> mons;
   std::string configFile;
   const auto configHomeC = std::getenv("XDG_CONFIG_HOME");
   if (configHomeC == nullptr) {
     const auto homeC = std::getenv("HOME");
     if (homeC == nullptr) {
-      std::cout << "Couldn't read either $HOME or $XDG_CONFIG_HOME environment variables\n";
+      LOG_ERROR("Couldn't read either $HOME or $XDG_CONFIG_HOME environment variables");
       std::exit(1);
     } else {
       configFile = std::filesystem::path(homeC) / ".config";
@@ -56,7 +59,8 @@ std::vector<std::string> GetDisplayConfigFile() {
   }
   mons.emplace_back(next);
 
-  for (auto& mon : mons) std::cout << mon << "\n";
+  LOG_INFO("mons config file:");
+  for (auto& mon : mons) LOG_INFO("mon: " << mon);
 
   return mons;
 }

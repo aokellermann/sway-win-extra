@@ -38,7 +38,7 @@ public:
 
   void SetWorkspace(const std::string &target) const {
     LOG_INFO("SetWorkspace called with string target=" << target);
-    const static std::string workspaceCommand("workspace ");
+    const static std::string workspaceCommand("workspace number ");
     _client->command(workspaceCommand + target);
   }
 
@@ -46,7 +46,7 @@ public:
 
   void MoveContainerToWorkspace(const std::string &target) const {
     LOG_INFO("MoveContainerToWorkspace called with string target=" << target);
-    const static std::string workspaceCommand("move container to workspace ");
+    const static std::string workspaceCommand("move container to workspace number ");
     _client->command(workspaceCommand + target);
   }
 
